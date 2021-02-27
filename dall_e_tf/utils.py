@@ -1,6 +1,3 @@
-import attr
-import math
-
 import tensorflow as tf
 
 logit_laplace_eps: float = 0.1
