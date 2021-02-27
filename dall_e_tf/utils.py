@@ -1,5 +1,6 @@
 import tensorflow as tf
 import matplotlib.pyplot as plt
+import numpy as np
 
 logit_laplace_eps: float = 0.1
 
@@ -25,7 +26,7 @@ def plot_reconstructions(model, x_test, n=10):
 	for i in range(n):
 		# display original
 		ax = plt.subplot(2, n, i + 1)
-		plt.imshow(x_test[i])
+		plt.imshow(np.squeeze(x_test[i]))
 		plt.title("original")
 		plt.gray()
 		ax.get_xaxis().set_visible(False)
