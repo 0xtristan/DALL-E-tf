@@ -14,10 +14,11 @@ def encoder_block(x_in, n_out, n_layers, activation='relu'):
     x = Conv2D(n_out, 1, activation=activation)(x)
     return id_path(x_in) + post_gain * x
 
-def dvae_encoder(img_size=None, group_count=4, n_hid=256, n_blk_per_group=2, vocab_size=8192, activation='relu'):
+def dvae_encoder(img_size=None, group_count=4, n_hid=256, n_blk_per_group=2, input_channels=3, vocab_size=8192,
+                 activation='relu'):
     act_fn = tf.keras.activations.get(activation)
     n_layers = group_count * n_blk_per_group
-    x_in = Input(shape=(img_size, img_size, 3))
+    x_in = Input(shape=(img_size, img_size, input_channels))
     x = Conv2D(n_hid, 7, padding='same')(x_in)
     for i in range(group_count):
         for _ in range(n_blk_per_group):
