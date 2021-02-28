@@ -12,7 +12,7 @@ def dVAE(enc, dec, temperature=1/16):
     )(z_e)
 
     z_hard = tf.math.argmax(z_e, axis=-1) # non-differentiable
-    z_hard = tf.one_hot(z_hard, enc.output.shape[-1], dtype=tf.float16)
+    z_hard = tf.one_hot(z_hard, enc.output.shape[-1], dtype=z_q.dtype)
 
     z = z_q + tf.stop_gradient(z_hard - z_q) # straight-through Gumbel-softmax
     x_rec = dec(z)
