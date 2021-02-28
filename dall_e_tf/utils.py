@@ -34,7 +34,7 @@ def plot_reconstructions(model, x_test, n=10):
 
 		# display reconstruction
 		ax = plt.subplot(2, n, i + 1 + n)
-		plt.imshow(decoded_imgs[i])
+		plt.imshow(np.squeeze(decoded_imgs[i]))
 		plt.title("reconstructed")
 		plt.gray()
 		ax.get_xaxis().set_visible(False)
