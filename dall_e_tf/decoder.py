@@ -29,5 +29,7 @@ def dvae_decoder(img_size=None, group_count=4, n_init=128, n_hid=256, n_blk_per_
         if i > 0:
             x = UpSampling2D(2)(x)
     x = act_fn(x)
-    x = Conv2D(output_channels, 1, dtype=tf.float32)(x) # Todo: figure out why this is 2x output channels
+    # They use 2*output_channels for a logit-laplace output model
+    # I added a sigmoid since I'm just using MSE loss for now
+    x = Conv2D(output_channels, 1, activation='sigmoid', dtype=tf.float32)(x)
     return Model(x_in, x)
