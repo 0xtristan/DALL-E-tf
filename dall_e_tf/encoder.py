@@ -24,7 +24,7 @@ def dvae_encoder(img_size=None, group_count=4, n_hid=256, n_blk_per_group=2, inp
         for _ in range(n_blk_per_group):
             x = encoder_block(x, n_hid * 2**i, n_layers, activation=activation)
         if i < group_count - 1:
-            x = MaxPool2D(2)(x)
+            x = MaxPool2D(2)(x) # would it be better to use strided conv?
     x = act_fn(x)
     x = Conv2D(vocab_size, 1, dtype=tf.float32)(x)
     return Model(x_in, x)
